@@ -1,10 +1,10 @@
-html {
-    scroll-behavior: smooth;
-}
-
-body {
+html, body {
     margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Чтобы не было прокрутки */
     font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
 }
 
 .navbar {
@@ -33,11 +33,49 @@ body {
     text-decoration: underline;
 }
 
-.content {
-    margin-top: 80px;
-    padding: 20px;
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 60px 20px 20px; /* Учитываем высоту navbar */
+    height: calc(100vh - 60px); /* Высота экрана минус navbar */
 }
 
-h1 {
-    color: #333;
+.box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1; /* Чтобы оба блока были равными */
+    height: 90%; /* Растягиваем блоки на всю высоту */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-container iframe {
+    width: 90%;
+    height: 80%;
+}
+
+/* Адаптация для телефонов */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .box {
+        height: 50vh; /* Делаем каждую секцию половиной экрана */
+    }
 }
