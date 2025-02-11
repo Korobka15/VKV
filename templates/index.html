@@ -4,33 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-
-    <div class="navbar">
+    <nav>
         <a href="/">Главная</a>
-        <a href="/autobus">О нас</a>
-        <a href="/forum">Контакты</a>
-    </div>
+        {% if user.is_authenticated %}
+            <a href="/logout">Выйти ({{ user.username }})</a>
+        {% else %}
+            <a href="/login">Войти</a>
+            <a href="/register">Регистрация</a>
+        {% endif %}
+    </nav>
 
-    <div class="container">
-        <div class="box">
-            <h2>О компании</h2>
-            <p>Здесь можно написать описание компании, её миссию, цели или что-то ещё.</p>
-        </div>
-
-        <div class="box">
-            <h2>Наш YouTube</h2>
-            <p>Подпишитесь на наш YouTube-канал!</p>
-            <a href="https://youtube.com/@vladimirkulikov9467?si=K_U68JLBJGJc6IVl" target="_blank">Смотреть канал</a>
-            
-            <!-- Встроенное видео -->
-            <div class="video-container">
-                <iframe width="560" height="315" src="https://youtu.be/vFwj7NbPbIU?si=oT8skkzugKdPjh8J" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
+    <h1>Добро пожаловать!</h1>
+    {% if user.is_authenticated %}
+        <p>Вы вошли как {{ user.username }}</p>
+    {% else %}
+        <p>Вы не вошли в аккаунт.</p>
+    {% endif %}
 </body>
 </html>
