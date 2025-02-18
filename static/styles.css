@@ -25,30 +25,35 @@ html, body {
     font-size: 18px;
     z-index: 1000;
 }
+
 .navbar .nav-links {
     display: flex;
     gap: 15px;
 }
+
 .navbar .auth-links {
     margin-left: auto;
+    margin-right: 2%;
 }
+
 .navbar a {
     color: white;
     text-decoration: none;
     padding: 10px 15px;
     display: inline-block;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin-right: 20px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .navbar a:hover {
-    text-decoration: underline;
+    background-color: #444;
+    border-radius: 5px;
 }
 
+.navbar a.active {
+    background-color: #28a745; /* Green background for active link */
+    border-radius: 5px;
+    font-weight: bold;
+}
 .container {
     display: flex;
     justify-content: space-between;
@@ -129,3 +134,158 @@ html, body {
         height: 50vh; /* Делаем каждую секцию половиной экрана */
     }
 }
+
+.register-page {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+.register-page h2 {
+    text-align: center;
+}
+
+.register-page .flash-messages {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.register-page form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.register-page form input {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.register-page form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.register-page form button:hover {
+    background-color: #218838;
+}
+
+.register-page a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.register-page a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+body.login-page {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+.login-page h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-page form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.login-page form input {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.login-page form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-page form button:hover {
+    background-color: #218838;
+}
+
+.login-page a {
+    display: block;
+    margin-top: 15px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-page a:hover {
+    text-decoration: underline;
+}
+
+/* Flash Messages for Login Page */
+.login-page .flash-messages {
+    margin-bottom: 15px;
+}
+
+.login-page .alert {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.login-page .alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.login-page .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+
+

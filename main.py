@@ -35,6 +35,14 @@ def load_user(user_id):
 def home():
     return render_template('index.html', user=current_user)
 
+@app.route('/autobus')
+def bus():
+    return render_template('autobus.html', user=current_user)
+
+@app.route('/forum')
+def chat():
+    return render_template('forum.html', user=current_user)
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
