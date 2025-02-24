@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О нас</title>
+    <title>Автобусы</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-
     <div class="navbar">
         <div class="nav-links">
             <a href="/" class="{{ 'active' if request.endpoint == 'index' else '' }}">Главная</a>
@@ -25,9 +24,25 @@
     </div>
 
     <div class="content">
-        <h1>О нас</h1>
-        <p>Здесь будет информация о компании или проекте.</p>
+        <h1>Выбор автобуса</h1>
+        <div class="dropdown">
+            <button onclick="toggleDropdown()" class="dropbtn">Автобусы ▼</button>
+            <div id="busDropdown" class="dropdown-content">
+                {% for category, buses in bus_data.items() %}
+                    <a href="/autobus/{{ category }}">Лидз {{ category }} местам →</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="busList" class="bus-info-box">
+            {% if selected_buses %}
+                <h2>Автобусы с {{ selected_category }} местами</h2>
+                <ul>
+                    {% for bus in selected_buses %}
+                        <li>{{ bus }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
     </div>
-
 </body>
 </html>

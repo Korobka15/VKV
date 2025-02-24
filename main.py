@@ -4,6 +4,15 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 import sqlite3
 
+bus_data = {
+    "7": ["Автобус A", "Автобус B"],
+    "9": ["Автобус C"],
+    "23": ["Автобус D", "Автобус E"],
+    "30": ["Автобус F"],
+    "50": ["Автобус G"],
+    "80": ["Автобус H"]
+}
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 db_path = 'VKVDatabase.db'
@@ -37,7 +46,11 @@ def home():
 
 @app.route('/autobus')
 def bus():
-    return render_template('autobus.html', user=current_user)
+    return render_template("autobus.html", bus_data=bus_data, selected_buses=None, selected_category=None, user=current_user)
+
+@app.route("/autobus/<category>")
+def autobus_category(category):
+    return render_template("autobus.html", bus_data=bus_data, selected_buses=bus_data.get(category, []), selected_category=category, user=current_user)
 
 @app.route('/forum')
 def chat():
