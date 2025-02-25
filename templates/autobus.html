@@ -25,24 +25,26 @@
 
     <div class="content">
         <h1>Выбор автобуса</h1>
-        <div class="dropdown">
-            <button onclick="toggleDropdown()" class="dropbtn">Автобусы ▼</button>
-            <div id="busDropdown" class="dropdown-content">
-                {% for category, buses in bus_data.items() %}
-                    <a href="/autobus/{{ category }}">Лидз {{ category }} местам →</a>
-                {% endfor %}
-            </div>
-        </div>
-        <div id="busList" class="bus-info-box">
-            {% if selected_buses %}
-                <h2>Автобусы с {{ selected_category }} местами</h2>
-                <ul>
-                    {% for bus in selected_buses %}
-                        <li>{{ bus }}</li>
+        <button onclick="openModal()" class="dropbtn">Выбрать автобус</button>
+
+        <!-- Модальное окно -->
+        <div id="busModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Выберите категорию</h2>
+                <ul id="categoryList">
+                    {% for category, buses in bus_data.items() %}
+                        <li class="category-item" onclick="showBuses('{{ category }}')">{{ category }}</li>
                     {% endfor %}
                 </ul>
-            {% endif %}
+                <div id="busListContainer"></div>
+            </div>
         </div>
+
+        <!-- Информация об автобусе -->
+        <div id="busInfo" class="bus-info-box"></div>
     </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

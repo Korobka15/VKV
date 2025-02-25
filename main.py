@@ -1,17 +1,8 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 import sqlite3
-
-bus_data = {
-    "7": ["Автобус A", "Автобус B"],
-    "9": ["Автобус C"],
-    "23": ["Автобус D", "Автобус E"],
-    "30": ["Автобус F"],
-    "50": ["Автобус G"],
-    "80": ["Автобус H"]
-}
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
@@ -20,6 +11,22 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+bus_data = {
+    "Маленькие (20 мест)": ["Bus A", "Bus B", "Bus C"],
+    "Средние (40 мест)": ["Bus D", "Bus E"],
+    "Большие (60 мест)": ["Bus F", "Bus G"]
+}
+
+bus_info = {
+    "Bus A": {"name": "Bus A", "capacity": 20, "description": "Маленький автобус для коротких маршрутов."},
+    "Bus B": {"name": "Bus B", "capacity": 20, "description": "Комфортабельный миниавтобус."},
+    "Bus C": {"name": "Bus C", "capacity": 20, "description": "Экономичный автобус с кондиционером."},
+    "Bus D": {"name": "Bus D", "capacity": 40, "description": "Средний автобус для городских поездок."},
+    "Bus E": {"name": "Bus E", "capacity": 40, "description": "Удобный автобус с мягкими сиденьями."},
+    "Bus F": {"name": "Bus F", "capacity": 60, "description": "Большой автобус с высокой вместимостью."},
+    "Bus G": {"name": "Bus G", "capacity": 60, "description": "Двухэтажный автобус для туристических маршрутов."}
+}
 
 class User(UserMixin):
     def __init__(self, id, name, email, password_hash):
@@ -46,11 +53,18 @@ def home():
 
 @app.route('/autobus')
 def bus():
-    return render_template("autobus.html", bus_data=bus_data, selected_buses=None, selected_category=None, user=current_user)
+    return render_template('autobus.html', bus_data=bus_data, user=current_user)
 
-@app.route("/autobus/<category>")
-def autobus_category(category):
-    return render_template("autobus.html", bus_data=bus_data, selected_buses=bus_data.get(category, []), selected_category=category, user=current_user)
+
+@app.route('/get_buses/<category>')
+def get_buses(category):
+    buses = bus_data.get(category, [])
+    return jsonify({"buses": buses})
+
+@app.route('/get_bus_info/<bus>')
+def get_bus_info(bus):
+    info = bus_info.get(bus, {})
+    return jsonify(info)
 
 @app.route('/forum')
 def chat():
