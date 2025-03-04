@@ -2,9 +2,13 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden; /* Чтобы не было прокрутки */
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
+    background-image: url('wallpapersden.com_dubrovnik-croatia_5120x2880.jpg');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
     padding-top: 35px;
     padding-left: 1%;
 }
@@ -69,7 +73,7 @@ html, body {
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     flex: 1;
-    height: 80%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: top; /* Centers text vertically */
@@ -87,8 +91,8 @@ html, body {
 }
 
 .video-container iframe {
-    width: 90%;
-    height: 80%;
+    width: 100%;
+    height: 90%;
 }
 
 .alert {

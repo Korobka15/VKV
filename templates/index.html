@@ -22,12 +22,24 @@
             {% endif %}
         </div>
     </div>
-
+    <div>
     <h1>Добро пожаловать!</h1>
     {% if user.is_authenticated %}
         <p>Вы вошли как {{ user.name }}</p>
     {% else %}
         <p>Вы не вошли в аккаунт.</p>
     {% endif %}
+    </div>
+    <div class="container">
+        <div class="box">
+            <h1 style="font-size: 2.5rem;">Большой заголовок</h1>
+            <p style="font-size: 1.5rem;">Здесь может быть ваш текст...</p>
+        </div>
+        <div class="box video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/vFwj7NbPbIU?si=WnWnWFHLmkawN56q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+
+            </iframe>
+        </div>
+    </div>
 </body>
 </html>
