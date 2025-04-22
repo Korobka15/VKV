@@ -62,23 +62,24 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-right: 240px;
     gap: 20px;
-    padding: 60px 20px 20px; /* Учитываем высоту navbar */
-    height: calc(100vh - 60px); /* Высота экрана минус navbar */
+    padding: 60px 20px 20px; 
+    height: calc(100vh - 60px); 
 }
 
 .box {
     background-color: white;
-    padding: 60px; /* Adds space inside the box */
+    padding: 60px; 
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     flex: 1;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: top; /* Centers text vertically */
-    align-items: center; /* Centers text horizontally */
-    text-align: center; /* Centers text inside the box */
+    justify-content: top; 
+    align-items: center; 
+    text-align: center; 
 }
 
 
@@ -127,7 +128,7 @@ html, body {
     border: 1px solid #bee5eb;
 }
 
-/* Адаптация для телефонов */
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -135,7 +136,7 @@ html, body {
     }
 
     .box {
-        height: 50vh; /* Делаем каждую секцию половиной экрана */
+        height: 50vh;
     }
 }
 
@@ -268,7 +269,7 @@ body.login-page {
     text-decoration: underline;
 }
 
-/* Flash Messages for Login Page */
+
 .login-page .flash-messages {
     margin-bottom: 15px;
 }
@@ -363,3 +364,29 @@ body.login-page {
     background-color: #218838;
 }
 
+.sidebar {
+    position: fixed;
+    width: 200px;
+    top: 60px;
+    right: 0;
+    background-color: #f4f4f4;
+    padding: 20px;
+    max-height: calc(100vh - 100px);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+.city-weather {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.city-weather img {
+    vertical-align: middle;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+}

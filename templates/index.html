@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <div class="sidebar">
+        <h2>Laikapstākļi tūrisma vietās</h2>
+        {% for city in weather_data %}
+            <div class="city-weather">
+                <h3>{{ city.name }}</h3>
+                <img src="{{ city.icon }}" alt="icon">
+                <p>{{ city.temp }}°C - {{ city.desc }}</p>
+            </div>
+        {% endfor %}
+    </div>
     <div class="navbar">
         <div class="nav-links">
             <a href="/" class="{{ 'active' if request.endpoint == 'home' else '' }}">Главная</a>

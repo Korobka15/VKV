@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 import sqlite3
+import requests
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
@@ -28,6 +29,28 @@ bus_info = {
     "Bus G": {"name": "Bus G", "capacity": 60, "description": "Двухэтажный автобус для туристических маршрутов."}
 }
 
+TOURIST_SPOTS = [
+    {"name": "Barcelona", "query": "Barcelona,ES"},
+    {"name": "Madrid", "query": "Madrid,ES"},
+    {"name": "Seville", "query": "Seville,ES"},
+    {"name": "Paris", "query": "Paris,FR"},
+    {"name": "Rome", "query": "Rome,IT"},
+]
+
+API_KEY = "173ab89248c0cb66a233c2c3b528676e"
+
+def get_weather(city_query):
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city_query}&appid={API_KEY}&units=metric"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        return {
+            "temp": data["main"]["temp"],
+            "desc": data["weather"][0]["description"].title(),
+            "icon": data["weather"][0]["icon"]
+        }
+    return None
+
 class User(UserMixin):
     def __init__(self, id, name, email, password_hash):
         self.id = id
@@ -49,7 +72,17 @@ def load_user(user_id):
 
 @app.route('/')
 def home():
-    return render_template('index.html', user=current_user)
+    weather_data = []
+    for spot in TOURIST_SPOTS:
+        data = get_weather(spot["query"])
+        if data:
+            weather_data.append({
+                "name": spot["name"],
+                "temp": data["temp"],
+                "desc": data["desc"],
+                "icon": f"http://openweathermap.org/img/wn/{data['icon']}@2x.png"
+            })
+    return render_template('index.html', weather_data=weather_data, user=current_user)
 
 @app.route('/autobus')
 def bus():
