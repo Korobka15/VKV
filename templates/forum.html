@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Автобусы</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            .box {
+                display: none;
+                padding: 10px;
+                border: 1px solid #ccc;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
 <body>
-
     <div class="navbar">
         <div class="nav-links">
             <a href="/" class="{{ 'active' if request.endpoint == 'index' else '' }}">Главная</a>
@@ -24,10 +32,40 @@
         </div>
     </div>
 
-    <div class="content">
-        <h1>Контакты</h1>
-        <p>Свяжись с нами по email: example@mail.com</p>
+    {% if user.is_authenticated %}
+    <input type="text" name="text" placeholder="Lorem ipsum" required>
+    <button type="submit">Submit</button>
+    {% else %}
+    <input disabled type="text" name="text" placeholder="Register to use it" required>
+    <button type="you are not registred">Submit</button>
+    {% endif %}
+
+
+<body>
+    <select id="categorySelect">
+        <option value="">--Choose a Category--</option>
+        {% for category in categories %}
+            <option value="{{ category }}">{{ category }}</option>
+        {% endfor %}
+    </select>
+
+    <div id="contentBox" class="box">
+        <p id="boxText">Selected category content will appear here.</p>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#categorySelect").change(function() {
+                let selectedCategory = $(this).val();
+                if (selectedCategory) {
+                    $("#boxText").text("You selected: " + selectedCategory);
+                    $("#contentBox").slideDown();
+                } else {
+                    $("#contentBox").slideUp();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
